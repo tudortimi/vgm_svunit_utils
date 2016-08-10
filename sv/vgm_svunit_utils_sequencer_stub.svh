@@ -23,6 +23,10 @@ class sequencer_stub #(type REQ = uvm_sequence_item, type RSP = REQ)
 
 
   extern virtual function void add_item(REQ item);
+
+  extern virtual function bit try_get_rsp(output RSP rsp);
+  extern task get_rsp(output RSP rsp);
+
   extern virtual function void flush();
 
 
@@ -51,13 +55,11 @@ class sequencer_stub #(type REQ = uvm_sequence_item, type RSP = REQ)
   // Responses
   extern virtual function void item_done(RSP item = null);
   extern virtual task put(RSP t);
-  extern virtual task put_response(RSP t);
+  extern virtual function void put_response(RSP t);
 
   // Sync control
   extern virtual task wait_for_sequences();
   extern virtual function bit has_do_available();
-
-
 
 
   protected uvm_tlm_fifo #(REQ) reqs;
@@ -77,6 +79,16 @@ endclass
 function void sequencer_stub::add_item(REQ item);
   void'(reqs.try_put(item));
 endfunction
+
+
+function bit sequencer_stub::try_get_rsp(output RSP rsp);
+  return rsps.try_get(rsp);
+endfunction
+
+
+task sequencer_stub::get_rsp(output RSP rsp);
+  rsps.get(rsp);
+endtask
 
 
 function void sequencer_stub::flush();
@@ -134,10 +146,10 @@ task sequencer_stub::put(RSP t);
 endtask
 
 
-task sequencer_stub::put_response(RSP t);
-  rsps.put(t);
+function void sequencer_stub::put_response(RSP t);
+  void'(rsps.try_put(t));
   num_put_response_calls++;
-endtask
+endfunction
 
 
 task sequencer_stub::wait_for_sequences();
