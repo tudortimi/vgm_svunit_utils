@@ -35,4 +35,40 @@
   else \
     `FAIL_IF(1)
 
+
+// Fails if the given event is triggered in the current time step.
+//
+// Note: Evaluation is stopped once the specified number of NBAs is reached.
+
+`define FAIL_IF_TRIGGERED(ev, num_nbas = 1) \
+  fork \
+    repeat (num_nbas) begin \
+      static int nba, next_nba; \
+      next_nba++; \
+      nba <= next_nba; \
+      @(nba); \
+    end \
+    \
+    begin \
+      wait (sequencer.put_response_called.triggered); \
+      `FAIL_IF_LOG(1, `"'ev' triggered`") \
+    end \
+  join_any \
+  disable fork;
+
+
+// Fails if the given event isn't triggered in the current time step.
+
+`define FAIL_UNLESS_TRIGGERED(ev) \
+  fork \
+    wait (ev.triggered); \
+    \
+    begin \
+      #1; \
+      `FAIL_IF_LOG(1, `"'ev' not triggered`") \
+    end \
+  join_any \
+  disable fork;
+
+
 `endif

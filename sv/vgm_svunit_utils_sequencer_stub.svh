@@ -42,6 +42,18 @@ class sequencer_stub #(type REQ = uvm_sequence_item, type RSP = REQ)
   int unsigned num_has_do_available_calls;
 
 
+  event get_next_item_called;
+  event try_next_item_called;
+  event get_called;
+  event peek_called;
+
+  event item_done_called;
+  event put_called;
+  event put_response_called;
+
+  event has_do_available_called;
+
+
   //----------------------------------------------------------------------------
   // Sequencer methods
   //----------------------------------------------------------------------------
@@ -108,24 +120,28 @@ endfunction
 task sequencer_stub::get_next_item(output REQ t);
   reqs.peek(t);
   num_get_next_item_calls++;
+  -> get_next_item_called;
 endtask
 
 
 task sequencer_stub::try_next_item(output REQ t);
   void'(reqs.try_peek(t));
   num_try_next_item_calls++;
+  -> try_next_item_called;
 endtask
 
 
 task sequencer_stub::get(output REQ t);
   reqs.get(t);
   num_get_calls++;
+  -> get_called;
 endtask
 
 
 task sequencer_stub::peek(output REQ t);
   reqs.peek(t);
   num_peek_calls++;
+  -> peek_called;
 endtask
 
 
@@ -137,18 +153,21 @@ function void sequencer_stub::item_done(RSP item = null);
     void'(rsps.try_put(item));
 
   num_item_done_calls++;
+  -> item_done_called;
 endfunction
 
 
 task sequencer_stub::put(RSP t);
   rsps.put(t);
   num_put_calls++;
+  -> put_called;
 endtask
 
 
 function void sequencer_stub::put_response(RSP t);
   void'(rsps.try_put(t));
   num_put_response_calls++;
+  -> put_response_called;
 endfunction
 
 
@@ -159,5 +178,6 @@ endtask
 
 function bit sequencer_stub::has_do_available();
   num_has_do_available_calls++;
+  -> has_do_available_called;
   return !reqs.is_empty();
 endfunction
