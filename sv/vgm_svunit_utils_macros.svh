@@ -17,6 +17,25 @@
 `define VGM_SVUNIT_UTILS_MACROS
 
 
+// Fails if the given SVA sequence matches.
+//
+// Note: Evaluating this macro will advance the simulation time.
+
+`define FAIL_IF_SEQ(seq) \
+  expect (seq ##0 1) \
+    `FAIL_IF(1)
+
+
+// Fails if the given SVA sequence doesn't match.
+//
+// Note: Evaluating this macro will advance the simulation time.
+
+`define FAIL_UNLESS_SEQ(seq) \
+  expect (seq ##0 1) \
+  else \
+    `FAIL_IF(1)
+
+
 // Fails if the given SVA property holds.
 //
 // Note: Evaluating this macro will advance the simulation time.
