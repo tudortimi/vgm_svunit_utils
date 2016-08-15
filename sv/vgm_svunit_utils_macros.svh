@@ -36,6 +36,31 @@
     `FAIL_IF(1)
 
 
+// Fails if the given SVA property holds vacuously.
+//
+// Note: Evaluating this macro will advance the simulation time.
+
+`define FAIL_IF_PROP_VAC(prop) \
+  while (1) begin \
+    expect (prop) \
+      break; \
+    else \
+      break; \
+    `FAIL_IF(1) \
+  end
+
+
+// Fails if the given SVA property doesn't hold vacuously.
+//
+// Note: Evaluating this macro will advance the simulation time.
+
+`define FAIL_UNLESS_PROP_VAC(prop) \
+  expect (prop) \
+    `FAIL_IF(1) \
+  else \
+    `FAIL_IF(1)
+
+
 // Fails if the given event is triggered in the current time step.
 //
 // Note: Evaluation is stopped once the specified number of NBAs is reached.
