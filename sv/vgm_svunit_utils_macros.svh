@@ -50,7 +50,7 @@
     end \
     \
     begin \
-      wait (sequencer.put_response_called.triggered); \
+      wait (ev.triggered); \
       `FAIL_IF_LOG(1, `"'ev' triggered`") \
     end \
   join_any \
