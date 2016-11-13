@@ -17,67 +17,7 @@
 `define VGM_SVUNIT_UTILS_MACROS
 
 
-// Fails if the given SVA sequence matches.
-//
-// Note: Evaluating this macro will advance the simulation time.
-
-`define FAIL_IF_SEQ(seq) \
-  expect (seq ##0 1) \
-    `FAIL_IF(1)
-
-
-// Fails if the given SVA sequence doesn't match.
-//
-// Note: Evaluating this macro will advance the simulation time.
-
-`define FAIL_UNLESS_SEQ(seq) \
-  expect (seq ##0 1) \
-  else \
-    `FAIL_IF(1)
-
-
-// Fails if the given SVA property holds.
-//
-// Note: Evaluating this macro will advance the simulation time.
-
-`define FAIL_IF_PROP(prop) \
-  expect (prop) \
-    `FAIL_IF(1)
-
-
-// Fails if the given SVA property doesn't hold.
-//
-// Note: Evaluating this macro will advance the simulation time.
-
-`define FAIL_UNLESS_PROP(prop) \
-  expect (prop) \
-  else \
-    `FAIL_IF(1)
-
-
-// Fails if the given SVA property holds vacuously.
-//
-// Note: Evaluating this macro will advance the simulation time.
-
-`define FAIL_IF_PROP_VAC(prop) \
-  while (1) begin \
-    expect (prop) \
-      break; \
-    else \
-      break; \
-    `FAIL_IF(1) \
-  end
-
-
-// Fails if the given SVA property doesn't hold vacuously.
-//
-// Note: Evaluating this macro will advance the simulation time.
-
-`define FAIL_UNLESS_PROP_VAC(prop) \
-  expect (prop) \
-    `FAIL_IF(1) \
-  else \
-    `FAIL_IF(1)
+`include "vgm_svunit_utils_sva_macros.svh"
 
 
 // Fails if the given event is triggered in the current time step.
