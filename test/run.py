@@ -11,7 +11,6 @@ parser.add_argument("-t", "--test", help="run only selected test(s)",
 args = parser.parse_args()
 
 command = ['runSVUnit']
-command.append('-s ius')
 
 if args.gui:
     command.append('-c -linedebug')
