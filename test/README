@@ -3,5 +3,5 @@ a macro that fails if a property passes, must fail when evaluated with '1'). Hen
 output of SVUnit is misleading for those tests.  Use
 
     test.sh
-    
+
 for this. No output means that everything is working as expected.
