@@ -20,14 +20,10 @@ if args.gui:
     command.append('-r -gui')
     
 if args.uvm_version:
-    print(args.uvm_version)
-    print(args.test)
     command.append('-r "-uvmhome CDNS-{version}"'.format(version=args.uvm_version))
 
 if args.test:
     for test in args.test:
         command.append('-t ' + test)
-
-print(' '.join(command))
 
 os.system(' '.join(command))
