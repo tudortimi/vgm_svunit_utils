@@ -13,7 +13,6 @@ parser.add_argument("--uvm-version", help="run with selected UVM version (only s
 args = parser.parse_args()
 
 command = ['runSVUnit']
-command.append('-s ius')
 
 if args.gui:
     command.append('-c -linedebug')

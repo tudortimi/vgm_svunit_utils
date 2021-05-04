@@ -1,4 +1,4 @@
-+dvt_auto_link_root+uvm=${UVM_HOME}
++dvt_auto_link+false
 -uvm
 
 -incdir dependencies/svunit/svunit_base
