@@ -83,7 +83,11 @@ class sequencer_stub #(type REQ = uvm_sequence_item, type RSP = REQ)
     seq_item_export = new("seq_item_export", this);
     reqs = new("reqs", this, 0);
     rsps = new("rsps", this, 0);
-  endfunction
+  endfunction  
+  
+  // Required sequencer methods - not used for testing
+  extern virtual function void disable_auto_item_recording();
+  extern virtual function bit is_auto_item_recording_enabled();
 endclass
 
 
@@ -180,4 +184,14 @@ function bit sequencer_stub::has_do_available();
   num_has_do_available_calls++;
   -> has_do_available_called;
   return !reqs.is_empty();
+endfunction
+
+
+function void sequencer_stub::disable_auto_item_recording();
+  // do nothing
+endfunction
+
+
+function bit sequencer_stub::is_auto_item_recording_enabled();
+  // do nothing
 endfunction
