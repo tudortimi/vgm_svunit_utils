@@ -2,6 +2,10 @@
 
 INCA_libs
 *.history
+.simvision
+
+xcelium.d
+xrun.key
 
 .__testsuite.sv
 .testrunner.sv

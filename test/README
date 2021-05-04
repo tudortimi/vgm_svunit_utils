@@ -1,0 +1,7 @@
+Some unit test are expected to fail if the code under test is working correctly (e.g.
+a macro that fails if a property passes, must fail when evaluated with '1'). Hence the
+output of SVUnit is misleading for those tests.  Use
+
+    test.sh
+
+for this. No output means that everything is working as expected.
