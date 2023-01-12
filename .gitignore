@@ -10,3 +10,7 @@ xrun.key
 .__testsuite.sv
 .testrunner.sv
 .svunit.f
+
+# Gradle
+.gradle/
+build/
