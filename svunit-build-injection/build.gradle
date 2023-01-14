@@ -1,0 +1,20 @@
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'com.verificationgentleman.svunit-build-injection'
+            implementationClass = 'SVUnitBuildInjectionPlugin'
+        }
+    }
+}
+
+dependencies {
+    implementation "com.verificationgentleman.gradle:gradle-hdvl:0.2.1"
+}
+
+repositories {
+    gradlePluginPortal()
+}
