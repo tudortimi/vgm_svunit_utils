@@ -1,0 +1,14 @@
+plugins {
+    id 'com.verificationgentleman.gradle.hdvl.svunit' version '0.2.1'
+}
+
+dependencies {
+    compile "com.verificationgentleman:vgm_svunit_utils"  // XXX WORKAROUND The SVUnit plugin doesn't support adding this to 'testCompile'
+    testCompile "org.svunit:svunit:v3.34.0"
+}
+
+toolChains {
+    runSVUnit {
+        args '-uvm'
+    }
+}

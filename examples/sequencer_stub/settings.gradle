@@ -1,0 +1,11 @@
+includeBuild '../..'
+includeBuild '../../svunit-build-injection'
+
+sourceControl {
+    gitRepository("https://github.com/svunit/svunit.git") {
+        producesModule("org.svunit:svunit")
+        plugins {
+            id "com.verificationgentleman.svunit-build-injection"
+        }
+    }
+}
