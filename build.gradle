@@ -1,5 +1,6 @@
 plugins {
     id 'com.verificationgentleman.gradle.hdvl.systemverilog' version '0.2.1'
+    id 'com.verificationgentleman.gradle.hdvl.svunit' version '0.2.1'
 }
 
 group 'com.verificationgentleman'
@@ -8,5 +9,18 @@ sourceSets {
     main {
         sv.srcDirs = ['sv']
         svHeaders.srcDirs = ['sv']
+    }
+    test {
+        sv.srcDirs = ['test']
+    }
+}
+
+dependencies {
+    testCompile "org.svunit:svunit:v3.34.0"
+}
+
+toolChains {
+    runSVUnit {
+        args '-c_arg -uvm'
     }
 }
