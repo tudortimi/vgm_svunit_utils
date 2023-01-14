@@ -22,5 +22,8 @@ dependencies {
 toolChains {
     runSVUnit {
         args '-c_arg -uvm'
+        if (project.hasProperty('extraRunSVUnitArgs')) {
+            args property('extraRunSVUnitArgs')
+        }
     }
 }
