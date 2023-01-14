@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-./run.py -t sva_macros_unit_test.sv > /dev/null
+./run.py -t tests/sva_macros_unit_test.sv > /dev/null
 
-grep passes::FAILED run.log
-grep fails::PASSED run.log
+grep passes::FAILED ../build/svunit/run.log
+grep fails::PASSED ../build/svunit/run.log
