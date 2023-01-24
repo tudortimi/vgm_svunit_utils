@@ -1,10 +1,16 @@
-includeBuild 'svunit-build-injection'
+// XXX WORKAROUND Can't include builds if this project is included as build.
+// We only need 'plugins' because we want to inject the 'svunit-build' plugin
+// into the 'svunit' source dependency.
+boolean inComposite = gradle.parent != null
+if (!inComposite) {
+    includeBuild 'svunit-build-injection'
 
-sourceControl {
-    gitRepository("https://github.com/svunit/svunit.git") {
-        producesModule("org.svunit:svunit")
-        plugins {
-            id "com.verificationgentleman.svunit-build-injection"
+    sourceControl {
+        gitRepository("https://github.com/svunit/svunit.git") {
+            producesModule("org.svunit:svunit")
+            plugins {
+                id "com.verificationgentleman.svunit-build-injection"
+            }
         }
     }
 }
